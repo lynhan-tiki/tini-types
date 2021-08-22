@@ -1,0 +1,15 @@
+{
+  "name": "@tiki.vn/mini-types",
+  "version": "0.1.0",
+  "description": "TypeScript declarations for Tiki's tini program.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lynhan-tiki/tini-types.git"
+  },
+  "keywords": [
+    "tiniapp",
+    "types"
+  ],
+  "license": "MIT",
+  "types": "./types/index.d.ts"
+}
