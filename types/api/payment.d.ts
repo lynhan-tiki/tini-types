@@ -23,27 +23,27 @@ declare module my {
    * *Sample*:
    * ```js
    * const app = getApp();
-	Page({
-		data: {
-		cart: app.cart
-		},
-		onShow() {
-		this.setData({ cart: app.cart });
-		},
-		doPayment() {
-		my.getAuthCode({
-		scope: [],
-		success: (res) => {
-			my.makePayment({
-			orderId: '67328847745515542',
-			success: (res) => {
-			my.alert({ title: 'payment', content: res });
-			}
-			});
-		}
-		});
-		}
-	});
+   *	Page({
+   *		data: {
+   *		cart: app.cart
+   *		},
+   *		onShow() {
+   *		this.setData({ cart: app.cart });
+   *		},
+   *		doPayment() {
+   *		my.getAuthCode({
+   *		scope: [],
+   *		success: (res) => {
+   *			my.makePayment({
+   *			orderId: '67328847745515542',
+   *			success: (res) => {
+   *			my.alert({ title: 'payment', content: res });
+   *			}
+   *			});
+   *		}
+   *		});
+   *		}
+   *	});
    * ```
    * https://developers.tiki.vn/docs/api/open/make-payment
    */

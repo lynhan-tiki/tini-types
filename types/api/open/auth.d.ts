@@ -3,7 +3,8 @@ declare namespace my {
 
   interface IGetAuthCodeSuccessResult {
     /**
-     * URL ảnh đại diện của user
+     * token code
+     *
      */
     readonly authCode: string;
 
