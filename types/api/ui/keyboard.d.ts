@@ -1,9 +1,7 @@
-/**
- * @file 键盘
- */
 declare namespace my {
   /**
-   * 隐藏键盘。
+   * my.hideKeyboard là API dùng để ẩn bàn phím.
+   * https://developers.tiki.vn/docs/api/ui/keyboard/hide-keyboard#gi%E1%BB%9Bi-thi%E1%BB%87u
    */
   function hideKeyboard(): void;
 }

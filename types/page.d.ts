@@ -42,17 +42,11 @@ interface IPageEvents {
   onPullIntercept?(): void;
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * onPullDownRefresh được gọi khi user pull to refresh hoặc gọi my.startPullDownRefresh.
+   * Sử dụng callback này để refresh lại data.
    */
   onPullDownRefresh?(params: { from: "manual" | "code" }): void;
   onTitleClick?(): void;
-
-  /**
-   * 版本要求：基础库 1.11.0 或更高版本，若版本较低，建议做 兼容处理。
-   * 点击标签（tab）时触发。
-   */
-  onTabItemTap?(item: { index: number; pagePath: string; text: string }): void;
-
   beforeTabItemTap?(): void;
 }
 
@@ -69,27 +63,12 @@ type SpliceDataMethod = (
 
 interface IPageInstance<D> extends Record<string, any> {
   /**
-   * 页面数据。
+   * Khởi tạo data cho page.
    */
   readonly data: D;
 
   /**
-   * 将数据从逻辑层发送到视图层，同时改变对应的 this.data 的值
+   * sử dụng hàm this.setData() để set lại data, page sẽ tự rerender.
    */
   setData: SetDataMethod<D>;
-
-  /**
-   * 同 setData，但是相比于 setData，在处理长列表的时候，其具有更高的性能
-   */
-  $spliceData: SpliceDataMethod;
-
-  /**
-   * Page 路径，对应 app.json 中配置的路径值。
-   */
-  readonly route: string;
-
-  /**
-   * 批量更新数据。
-   */
-  $batchedUpdates: (fn: () => void) => void;
 }

@@ -1,6 +1,6 @@
 declare namespace my {
   /**
-   * 获取基础库版本号，仅供参考，代码逻辑请不要依赖这个值。
+   * my.SDKVersion là API dùng để lấy version hiện tại của SDK.
    */
   const SDKVersion: string;
 }

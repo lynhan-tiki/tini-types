@@ -6,18 +6,11 @@
 /// <reference path="./location.d.ts" />
 /// <reference path="./network.d.ts" />
 /// <reference path="./device/index.d.ts" />
-/// <reference path="./bluetooth.d.ts" />
-/// <reference path="./ibeacon.d.ts" />
-/// <reference path="./data.d.ts" />
-/// <reference path="./share.d.ts" />
-/// <reference path="./menu.d.ts" />
-/// <reference path="./scene.d.ts" />
 /// <reference path="./analytics.d.ts" />
+/// <reference path="./payment.d.ts" />
+/// <reference path="./auth.d.ts" />
 
 declare namespace my {
-  /**
-   * 节点查询 https://docs.alipay.com/mini/api/selector-query
-   */
   interface IBoundingClientRect {
     width: number;
     height: number;
@@ -30,9 +23,7 @@ declare namespace my {
   type ScrollOffset = Record<"scrollTop" | "scrollLeft", number>;
 
   type SelectorResult = ReadonlyArray<
-    null
-    | Readonly<IBoundingClientRect>
-    | Readonly<ScrollOffset>
+    null | Readonly<IBoundingClientRect> | Readonly<ScrollOffset>
   >;
 
   type ISelectorExecCallback = (ret: SelectorResult) => void;
@@ -46,74 +37,18 @@ declare namespace my {
     exec(ret: ISelectorExecCallback): void;
   }
 
+  /**
+   * Để truy cập thông tin của một thành phần trên UI nhằm mục tính tính toán cho việc hiện thị,
+   * bạn có thể sử dụng SelectorQuery để select và lấy thông tin.
+   * Methods SelectorQuery sẽ bao gồm nhóm các phương thức selector và actions.
+   * @param {Record<string, any>} [params]
+   * @return {*}  {ISelectorQuery}
+   * https://developers.tiki.vn/docs/api/ui/selector-query/selector-query#selector-query
+   */
   function createSelectorQuery(params?: Record<string, any>): ISelectorQuery;
 
+  /**
+   * `my.canIUse` là API dùng để kiểm tra xem Runtime của Mini App hiện tại có hỗ trợ một API cụ thể hay không
+   */
   function canIUse(query: string): boolean;
-
-  function reportCustomError(error: Error): void;
-
-  function reportBizReady(): void;
-
-  function call(apiName: string, params?: Record<string, any> | ((...args: any[]) => void)): void;
-  function call(apiName: string, params?: Record<string, any>, callback?: (...args: any[]) => void): void;
-
-  /**
-   * 获取自定义配置数据：https://opendocs.alipay.com/mini/isv/creatminiapp
-   */
-  function getExtConfigSync(): Record<string, any>;
-
-  /**
-   * 同步获取小程序 APPID。
-   */
-  function getAppIdSync(): string;
-
-  interface IUpdateManager {
-    /**
-     * 当小程序新版本下载完成后（即收到 onUpdateReady 回调），强制小程序重启并使用新版本。
-     */
-    applyUpdate(): void;
-
-    /**
-     * 监听向支付宝后台请求检查更新结果事件。
-     */
-    onCheckForUpdate(cb: (res: { hasUpdate: boolean }) => void): void;
-
-    /**
-     * 监听小程序有版本更新事件。
-     */
-    onUpdateReady(cb: () => void): void;
-
-    /**
-     * 监听小程序更新失败事件。
-     */
-    onUpdateFailed(cb: () => void): void;
-  }
-
-  /**
-   * 创建一个 UpdateManager 对象，获取全局唯一的版本更新管理器，用于管理小程序更新。
-   */
-  function getUpdateManager(): IUpdateManager;
-
-  /**
-   * 唤起分享面板。当通过 my.showSharePanel 唤起分享功能时，page.onShareAppMessage 入参中 from 的值为 code。
-   */
-  function showSharePanel(): void;
-
-  interface IOnUnhandledRejectionCallbackOptions {
-    /**
-     * 拒绝原因，一般是 error 对象。
-     */
-     reason: string;
-
-     /**
-      * 被拒绝的 Promise 对象。
-      */
-     promise: Promise<any>;
-  }
-
-  interface IOnUnhandledRejectionCallback {
-    (res: IOnUnhandledRejectionCallbackOptions): void;
-  }
-
-  function onUnhandledRejection(cb: IOnUnhandledRejectionCallback): void;
 }

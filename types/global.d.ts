@@ -1,127 +1,120 @@
 /**
- * `App()` 接受一个 object 作为参数，用来配置小程序的生命周期等。
+ * `App()` root entry của app
  */
 interface AppOptions {
   /**
-   * 生命周期函数。
+   * *App lifecycle*。
    *
-   * 监听小程序初始化。
+   * `onLaunch` sẽ được trigger khi lần đầu init app.
    *
-   * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）。
+   * AppCreate(`onLanch` => `onShow`) => PageCreate(`onLoad` => `onShow` => `onReady`)
+   * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
    */
   onLaunch?(options: IAppLaunchOptions): void;
 
   /**
-   * 生命周期函数。
+   * *App lifecycle*。
    *
-   * 监听小程序显示。
+   * `onShow` sẽ được trigger sau khi hàm `onLaunch`
+   *  và trước khi khởi tạo Page.
    *
-   * 当小程序启动，或从后台进入前台显示，会触发 onShow。
-   *
-   * **注意:** 不要在 onShow 中进行 redirectTo/navigateTo 等操作页面栈的行为。
+   * AppCreate(`onLanch` => `onShow`) => PageCreate(`onLoad` => `onShow` => `onReady`)
+   * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
    */
   onShow?(options: IAppLaunchOptions): void;
 
   /**
-   * 生命周期函数。
+   * *App lifecycle*。
    *
-   * 监听小程序隐藏。
+   * `onShow` sẽ được trigger khi app bị ẩn.
    *
-   * 当小程序从前台进入后台，会触发 onHide。
    */
   onHide?(): void;
-
-  /**
-   * 错误监听函数。
-   *
-   * 当小程序发生脚本错误，或者 API 调用失败时，会触发 onError 并带上错误信息。
-   */
-  onError?(error: any): void;
-
-  /**
-   * 全局分享配置。
-   *
-   * 当页面未设置 `page.onShareAppMessage` 时调用分享会执行全局的分享设置。
-   */
-  onShareAppMessage?(
-    options: OnShareAppMessageOptions
-  ): IOnShareAppMessageResult;
-
-  /**
-   * 当Promise 被 reject 且没有 reject 处理器时触发。也可使用 my.onUnhandledRejection 绑定监听。
-   * 参数和注意事项与 my.onUnhandledRejection 一致。
-   */
-  onUnhandledRejection?(
-    options?: my.IOnUnhandledRejectionCallbackOptions
-  ): void;
 }
 declare function App(options: AppOptions): void;
-/* tslint:enable:no-unnecessary-generics */
-
 /**
- * 获取小程序实例，一般用在各个子页面之中获取顶层应用。
+ * Applet cung cấp 1 hàm global là getApp, có thể access ở cả page và component.
+ * Hàm getApp trả về instance của application. Ví dụ ở Application, khai báo biến globalData
+ * ```js
+ * App({
+ * globalData: 1
+ *  doSomething() {
+ *   // bla bla
+ *  }
+ * })
+ * ```
+ * Ở page access biến globalData và gọi hàm doSomething
+ * ```js
+ * // page.js
+ * var app = getApp();
+ * console.log(app.globalData);
+ * app.doSomething()
+ * ```
  */
 declare function getApp(): any;
 
 /**
- * Page() 函数用来注册一个页面。
- * 接受一个 object 参数，其指定页面的初始数据、生命周期函数、事件处理函数等。
+ * Page() là 1 instance đại diện cho các pages của app。
  */
 /* tslint:disable:no-unnecessary-generics */
 interface PageOptions {
   data: any;
   /**
-   * 生命周期函数--监听页面加载
-   *
-   * @param query query 参数为 my.navigateTo 和 my.redirectTo 中传递的 query 对象。
+   * Page lifecycle
+   * onLoad được gọi sau khi Page được khởi tạo.
+   * Khi sử dụng my.navigateTo, my.redirectTo,
+   * @params query sẽ truyền vào trong query.
+   * Format của query: "parameterName=parameterValue¶meterName=parameterValue...".
+   * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
    */
   onLoad?(query: Query): void;
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * được gọi sau khi page finish render lần đầu tiên
+   * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
    */
   onReady?(): void;
 
   /**
-   * 生命周期函数--监听页面显示
+   * được gọi khi Page được show hoặc mở lại từ background
+   * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
    */
   onShow?(): void;
 
   /**
-   * 生命周期函数--监听页面隐藏
+   * được gọi sau Page bị hide hoặc enter background
+   * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
    */
   onHide?(): void;
 
   /**
-   * 生命周期函数--监听页面卸载
+   * được gọi khi page bị destroy
+   * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
    */
   onUnload?(): void;
 
   /**
-   * 页面上拉触底事件的处理函数
+   * onPullDownRefresh được gọi khi user pull to refresh hoặc gọi my.startPullDownRefresh.
+   * Sử dụng callback này để refresh lại data.
+   * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
    */
-  onReachBottom?(): void;
+  onPullDownRefresh?(): void;
 
   /**
-   * 返回自定义分享信息
+   * được gọi khi user thực hiện tác vụ "Chia sẻ" trong options menu.
+   * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
    */
   onShareAppMessage?(
     options: OnShareAppMessageOptions
   ): IOnShareAppMessageResult;
-
-  /**
-   * 页面滚动时触发
-   *
-   * @param event 滚动事件参数
-   */
-  onPageScroll?(event: IPageScrollEvent): void;
 }
 declare function Page(options: PageOptions): void;
 /* tslint:enable:no-unnecessary-generics */
 
 /**
- * getCurrentPages() 函数用于获取当前页面栈的实例，
- * 以数组形式按栈的顺序给出，第一个元素为首页，最后一个元素为当前页面。
+ * getCurrentPages() là global method được sử dụng để lấy stack của page hiện tại.
+ * Kết quả trả về là array các pages với phần tử đầu tiên là home, phần từ cuối cùng là page hiện tại.
+ * https://developers.tiki.vn/docs/framework/miniapp-page/get-current-pages
  */
 declare function getCurrentPages(): Array<IPageInstance<any>>;
 

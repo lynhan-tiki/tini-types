@@ -1,28 +1,36 @@
 interface IComponentLifeCycleMethods {
   /**
-   * 组件生命周期函数，组件创建时触发
+   * được gọi khi Component được khởi tạo
    */
   onInit?(): void;
 
   /**
-   * 组件生命周期函数，组件创建时和更新前触发
+   * được gọi sau khi Component được khởi tạo, hoặc khi Component nhận các props mới
    *
-   * @param nextProps 接收到的 props 数据
+   * @param nextProps props
+   * Hàm này được gọi sau khi Component nhận các data và props mới. Trong deriveDataFromProps bạn có thể
+   *  - Truy cập vào this.is, this.$id, this.$page và các thuộc tính khác
+   *  - Truy cập vào this.data, this.props
+   *  - Truy cập vào custom properties và methods
+   *  - Gọi các hàm this.setData và this.$spliceData để thay đổi data
+   *  - Sử dụng nextProps để lấy ra các thuộc tính mới sẽ được update
    */
   deriveDataFromProps?(nextProps: any): void;
 
   /**
-   * 组件生命周期函数，组件创建完毕时触发
+   * `didMount` được gọi sau khi Custom Component được render lần đầu tiên.
+   * Chúng ta có thể sử dụng hàm này để trigger việc load data từ server
    */
   didMount?(): void;
 
   /**
-   * 组件生命周期函数，组件更新完毕时触发
+   * `didUpdate` được gọi sau khi data của Component được update.
+   * Hàm này được gọi mõi khi data trong Component thay đổ
    */
   didUpdate?(prevProps: any, prevData: any): void;
 
   /**
-   * 组件生命周期函数，组件删除时触发
+   * `didUnmount` được gọi khi Component được unmount.
    */
   didUnmount?(): void;
 }

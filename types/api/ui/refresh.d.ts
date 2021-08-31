@@ -1,6 +1,3 @@
-/**
- * @file 下拉刷新
- */
 declare namespace my {
   interface IStartPullDownRefreshOptions {
     success?: () => void;
@@ -13,12 +10,18 @@ declare namespace my {
     complete?: () => void;
   }
   /**
-   * 停止当前页面的下拉刷新。
+   * `my.stopPullDownRefresh` là api để stop loading khi đã gọi `my.startPullDownRefresh` hoặc manual pull down.
+   *  Khi đã có được dữ liệu, phải gọi hàm này để tắt loading.
+   *  https://developers.tiki.vn/docs/api/ui/pull-down/stop-pull-refresh
    */
   function stopPullDownRefresh(options?: IStartPullDownRefreshOptions): void;
 
   /**
-   * 开始下拉刷新。代码执行后触发下拉刷新动画，效果与用户手动下拉刷新保持一致。
+   * `my.startPullDownRefresh` là api để active tính năng pull down to refresh,
+   * khi được gọi sẽ có animation loading tương đương với việc manual pull down list.
+   * Hàm `onPullDownRefresh` của page sẽ được trigger.
+   * Sau khi đã lấy được dữ liệu, có thể gọi `my.stopPullDownRefresh` để stop loading.
+   * https://developers.tiki.vn/docs/api/ui/pull-down/start-pull-refresh
    */
   function startPullDownRefresh(options?: IStopPullDownRefreshOptions): void;
 }
