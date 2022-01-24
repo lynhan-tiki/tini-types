@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
-        "allowUmdGlobalAccess": true
+        "allowUmdGlobalAccess": true,
+        "skipLibCheck": true
     },
 }

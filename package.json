@@ -1,6 +1,6 @@
 {
   "name": "@tiki.vn/tini-types",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "TypeScript declarations for Tiki's tini program.",
   "repository": {
     "type": "git",

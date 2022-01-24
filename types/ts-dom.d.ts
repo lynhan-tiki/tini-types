@@ -1,7 +1,8 @@
 
 // <reference path="../node_modules/typescript/lib/lib.d.ts" /> 
 // <reference path="../node_modules/typescript/lib/lib.dom.d.ts" /> 
-// <reference path="../node_modules/typescript/lib/lib.dom.iterable.d.ts" /> 
+// <reference path="../node_modules/typescript/lib/lib.dom.iterable.d.ts" />  
+/// <reference path="../node_modules/typescript/lib/lib.es5.d.ts" /> 
 /// <reference path="../node_modules/typescript/lib/lib.es2015.collection.d.ts" /> 
 /// <reference path="../node_modules/typescript/lib/lib.es2015.core.d.ts" /> 
 /// <reference path="../node_modules/typescript/lib/lib.es2015.d.ts" /> 
