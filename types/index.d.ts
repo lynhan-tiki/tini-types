@@ -1,6 +1,7 @@
-// TypeScript Version: 3.3
-
-/// <reference path="./app.d.ts" />
+// TypeScript Version: 3.3 
+/// <reference path="ts-dom.d.ts" /> 
+// Mini App typings
+/// <reference path="./app.d.ts" /> 
 /// <reference path="./component.d.ts" />
 /// <reference path="./page.d.ts" />
 /// <reference path="./api/index.d.ts" />
