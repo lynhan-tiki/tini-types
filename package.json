@@ -1,6 +1,6 @@
 {
   "name": "@tiki.vn/tini-types",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "TypeScript declarations for Tiki's tini program.",
   "repository": {
     "type": "git",
@@ -10,9 +10,12 @@
     "tiniapp",
     "types"
   ],
+  "scripts": {
+    "postinstall": "cp node_modules/typescript/lib/*.d.ts ./lib"
+  },
   "license": "MIT",
   "types": "./types/index.d.ts",
-  "dependencies": {
+  "devDependencies": {
     "typescript": "^4.5.5"
   }
 }
