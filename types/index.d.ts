@@ -1,4 +1,5 @@
-// TypeScript Version: 3.3 
+/// <reference no-default-lib="true"/>
+
 /// <reference path="ts-dom.d.ts" /> 
 // Mini App typings
 /// <reference path="./app.d.ts" /> 
