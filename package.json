@@ -11,7 +11,7 @@
     "types"
   ],
   "scripts": {
-    "postinstall": "cp node_modules/typescript/lib/*.d.ts ./lib"
+    "postinstall": "cp node_modules/typescript/lib/*.d.ts ./lib || echo postinstall is not triggered in prod mode"
   },
   "license": "MIT",
   "types": "./types/index.d.ts",
