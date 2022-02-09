@@ -1,6 +1,3 @@
-/**
- * @file 画布
- */
 /// <reference no-default-lib="true"/> 
 declare namespace my {
   interface ILinearGradient {
