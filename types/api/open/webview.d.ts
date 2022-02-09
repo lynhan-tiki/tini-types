@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 declare namespace my {
   interface IWebViewContext {
     postMessage(msg: Record<string, any>): void;

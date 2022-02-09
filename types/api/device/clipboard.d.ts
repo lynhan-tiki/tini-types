@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 declare namespace my {
   interface IClipboardOptions {
     success?(res: { text: string }): void;

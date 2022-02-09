@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 declare namespace my {
   interface INavigateToMiniProgram {
     appId: string;

@@ -1,3 +1,6 @@
+/// <reference no-default-lib="true"/> 
+
+/// <reference no-default-lib="true"/> 
 declare namespace my {
   interface ILocation {
     latitude: number;

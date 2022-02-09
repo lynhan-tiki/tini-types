@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 declare namespace my {
   /**
    * my.hideKeyboard là API dùng để ẩn bàn phím.

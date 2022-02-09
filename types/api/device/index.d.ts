@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 /// <reference path="./canIUse.d.ts" />
 /// <reference path="./version.d.ts" />
 /// <reference path="./system.d.ts" />

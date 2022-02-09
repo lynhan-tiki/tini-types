@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 declare namespace my {
   type GetAuthCodeOptionsScope = "auth_base" | "auth_user" | "auth_zhima";
 

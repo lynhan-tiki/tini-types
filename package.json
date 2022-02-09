@@ -1,18 +1,15 @@
 {
   "name": "@tiki.vn/tini-types",
-  "version": "0.2.4",
-  "description": "TypeScript declarations for Tiki's tini program.",
+  "version": "0.2.5",
+  "description": "TypeScript declarations for Tiki's Tini App.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lynhan-tiki/tini-types.git"
+    "url": "https://github.com/tikivn/tini-types.git"
   },
   "keywords": [
     "tiniapp",
     "types"
   ],
-  "scripts": {
-    "postinstall": "cp node_modules/typescript/lib/*.d.ts ./lib || echo postinstall is not triggered in prod mode"
-  },
   "license": "MIT",
   "types": "./types/index.d.ts",
   "devDependencies": {

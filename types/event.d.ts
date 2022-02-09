@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 declare namespace tinyapp {
   interface IBaseEvent {
     readonly type: string;

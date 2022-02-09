@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 interface IComponentLifeCycleMethods {
   /**
    * được gọi khi Component được khởi tạo

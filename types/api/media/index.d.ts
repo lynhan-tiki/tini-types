@@ -1,4 +1,5 @@
 /// <reference path="./audio.d.ts" />
+/// <reference no-default-lib="true"/> 
 declare namespace my {
   interface IChooseImageSuccessResult {
     readonly apFilePaths?: ReadonlyArray<string>;

@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 type Query = Record<string, string | number>;
 
 interface IAppLaunchOptions {

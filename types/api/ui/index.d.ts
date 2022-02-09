@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 /// <reference path="./navigator.d.ts" />
 /// <reference path="./tabbar.d.ts" />
 /// <reference path="./refresh.d.ts" />

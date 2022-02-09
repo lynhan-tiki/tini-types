@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/> 
 declare module my {
   interface IIsLoggedIn {
     // Callback function khi thành công.

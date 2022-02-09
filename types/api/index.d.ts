@@ -1,3 +1,5 @@
+/// <reference no-default-lib="true"/> 
+
 /// <reference path="./ui/index.d.ts" />
 /// <reference path="./open/index.d.ts" />
 /// <reference path="./media/index.d.ts" />
@@ -10,6 +12,7 @@
 /// <reference path="./payment.d.ts" />
 /// <reference path="./auth.d.ts" />
 
+/// <reference no-default-lib="true"/> 
 declare namespace my {
   interface IBoundingClientRect {
     width: number;

@@ -1,6 +1,7 @@
 /**
  * @file 画布
  */
+/// <reference no-default-lib="true"/> 
 declare namespace my {
   interface ILinearGradient {
     addColorStop(stop: number, color: string): void;
