@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/>
 /**
  * `App()` root entry của app
  */

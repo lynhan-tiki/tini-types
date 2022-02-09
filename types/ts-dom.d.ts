@@ -1,3 +1,4 @@
+/// <reference no-default-lib="true"/>
 
 // <reference path="../lib/lib.d.ts" /> 
 // <reference path="../lib/lib.dom.d.ts" /> 
