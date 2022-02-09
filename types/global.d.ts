@@ -1,4 +1,5 @@
 /// <reference no-default-lib="true"/>
+/// <reference lib="es5"/>
 /**
  * `App()` root entry của app
  */
