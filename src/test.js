@@ -8,6 +8,7 @@ Component({
         this.data.num;
         this.props.defaultPropsString;
         this.setData({test:'nana'})
+        this.setData({test:'nana', notDefinedKey:"lalala"})
         this.setData(d=>({test:'nana', num:d.num}),data=>{console.log('updated',data)})
   
         this.props.defaultPropsMethod();
@@ -43,3 +44,5 @@ Component({
     },
   });
   
+
+  console.log

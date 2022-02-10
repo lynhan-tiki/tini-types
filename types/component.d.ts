@@ -1,7 +1,7 @@
 /// <reference no-default-lib="true"/> 
 
 
-
+type AnyObject =  Record<string,any>
  
 
   interface UserDefineMethod<SCOPE, P extends readonly any[] = any[], RETURN = void> {
@@ -13,8 +13,18 @@
 
    
   interface UpdateMethods<DATA>{
-    setData(updater: Partial<DATA>, callback?: (data: DATA) => void): Promise<void>;
-    setData(updater: (data: DATA) => Partial<DATA>, callback?: (data: DATA) => void): Promise<void>;
+    /**
+     * function that updates `this.data` and trigger update UI
+     * @param updater the whole or the partial of new this.data or any plain Object
+     * @param callback callback will be triggerred after updated this.data and UI
+     */
+    setData(updater: Partial<DATA> & AnyObject, callback?: (data: DATA) => void): Promise<void>;
+        /**
+     * function that updates `this.data` and trigger update UI
+     * @param updater function that return the whole or the partial of new this.data or any plain Object
+     * @param callback callback will be triggerred after updated this.data and UI
+     */
+    setData(updater: (data: DATA) => Partial<DATA> & AnyObject, callback?: (data: DATA) => void): Promise<void>;
   }
 
   type FunctionRef<REF, DATA, PROPS, M> =
@@ -23,12 +33,21 @@
         "methods" | "onInit" | "deriveDataFromProps" | "didMount" | "didUpdate" | "didUnmount"
       >
     & UpdateMethods<DATA>
-    & { props: PROPS }
-    & M;
+    & { props: PROPS & AnyObject}
+    & M ;
 
   interface ComponentOptions<DATA, PROPS, M> {
-    data?: DATA;
+    /**
+     * @property data Object which binded one way to the UI
+     */
+    data?: DATA ;
+    /**
+     * @property props Object which is default value of props sending from parent Node(from Component or Page)
+     */
     props?: PROPS;
+      /**
+     * @property Object included methods defined by user
+     */
     methods?: {
       [key: string]: UserDefineMethod<
         FunctionRef<ComponentOptions<DATA, PROPS, M>, DATA, PROPS, M>,
