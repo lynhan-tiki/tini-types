@@ -120,12 +120,4 @@ declare function Page(options: PageOptions): void;
  */
 declare function getCurrentPages(): Array<IPageInstance<any>>;
 
-/* tslint:disable:no-unnecessary-generics */
-interface ComponentOptions extends IComponentLifeCycleMethods {
-  props?: any;
-  data?: any;
-  methods?: { [method: string]: Function };
-}
-
-declare function Component(options: ComponentOptions): void;
-/* tslint:enable:no-unnecessary-generics */
+ 
