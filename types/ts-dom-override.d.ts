@@ -1,62 +1,69 @@
 
 /// <reference no-default-lib="true"/>
  
+
+declare global {
+    type Window = undefined;
+    type window = undefined;
+    var fetch = undefined;
+
+}
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const globalThis : undefined;
+declare var globalThis : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const global : undefined;
+declare var global : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const fetch : undefined;
+declare var fetch : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const self : undefined;
+declare var self : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const Window : undefined;
+declare var Window : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const window : undefined;
+declare var window : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const document : undefined;
+declare var document : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const location : undefined;
+declare var location : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const XMLHttpRequest : undefined;
+declare var XMLHttpRequest : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const eval : undefined;
+declare var eval : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-declare const Function : undefined;
+declare var Function : undefined;
 
 /**
  * `[Warning]`This global entity is not available in Tini app including *.sjs files.
  */
-
+this.fetch

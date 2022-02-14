@@ -1,6 +1,6 @@
 /// <reference no-default-lib="true"/> 
 
-declare module my {
+declare namespace my {
   interface IMakePaymentParams {
     // Order Id để thực hiện payment
     orderId: string;

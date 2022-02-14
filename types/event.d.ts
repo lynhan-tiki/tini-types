@@ -1,5 +1,5 @@
 /// <reference no-default-lib="true"/> 
-declare namespace tinyapp {
+declare namespace tinitypes {
   interface IBaseEvent {
     readonly type: string;
     readonly timeStamp: number;
