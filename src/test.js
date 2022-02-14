@@ -96,4 +96,23 @@ Page({
 
 
 
+
+Page({
+  data:{
+    name: "lalala"
+  },
+  /**
+   * 
+   * @param {string} name 
+   */
+  userMethod(name){
+    if(this.data.name.charCodeAt(0)==="l".charCodeAt(0)){
+      this.setData({name})
+    }
+  },
+  onLoad(query){
+    this.userMethod('funny')
+  }
+})
+
  

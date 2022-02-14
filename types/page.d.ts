@@ -9,6 +9,14 @@
 
 
 declare namespace tinitypes.Page {
+  type UNACCESSIBLE_KEYS_IN_PAGE
+  = "onLoad"
+|"onShow"
+|"onReady"
+|"onHide"
+|"onUnload"
+|"onPullDownRefresh"
+|"onShareAppMessage"
   type OptionalInterface<T> = { [K in keyof T]: Optional<T[K]> }
   type AnyObject = Record<string, any>
   type Instance<
@@ -25,7 +33,10 @@ declare namespace tinitypes.Page {
     > = (TCustom &
       Partial<Data<TData>> &
       Partial<ILifetime>) &
-    ThisType<Instance<TData, TCustom>>
+    ThisType<
+    Omit<Instance<TData, TCustom>,
+    UNACCESSIBLE_KEYS_IN_PAGE>
+    >
   type TrivialInstance = Instance<AnyObject, AnyObject>
   interface Constructor {
     <TData extends DataOption, TCustom extends CustomOption>(
