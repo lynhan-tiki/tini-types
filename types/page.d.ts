@@ -55,35 +55,35 @@ declare namespace tinitypes.Page {
     onLoad(
       this: R,
       query: Record<string, string | undefined>
-    ): void
+    ): void | Promise<void>
     /**
     * được gọi khi Page được show hoặc mở lại từ background
     * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
     */
     onShow(
       this: R,
-    ): void
+    ): void | Promise<void>
     /**
      * được gọi sau khi page finish render lần đầu tiên
      * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
      */
     onReady(
       this: R,
-    ): void
+    ): void | Promise<void>
     /**
     * được gọi sau Page bị hide hoặc enter background
     * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
     */
     onHide(
       this: R,
-    ): void
+    ): void | Promise<void>
     /**
     * được gọi khi page bị destroy
     * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
     */
     onUnload(
       this: R,
-    ): void
+    ): void | Promise<void>
 
     /**
      * onPullDownRefresh được gọi khi user pull to refresh hoặc gọi my.startPullDownRefresh.
@@ -92,7 +92,7 @@ declare namespace tinitypes.Page {
      */
     onPullDownRefresh(
       this: R,
-    ): void
+    ): void | Promise<void>
     /**
     * được gọi khi user thực hiện tác vụ "Chia sẻ" trong options menu.
     * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
