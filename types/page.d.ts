@@ -29,13 +29,12 @@ declare namespace tinitypes.Page {
     TCustom
     > = (TCustom &
       Partial<Data<TData>> &
-      Partial<ILifetime<
+      Partial<LifeCycles<
         Instance<TData, TCustom>
       >>) &
     ThisType<
       Instance<TData, TCustom>
     >
-  type TrivialInstance = Instance<AnyObject, AnyObject>
   interface Constructor {
     <TData, TCustom>(
       options: Options<TData, TCustom>
@@ -43,7 +42,7 @@ declare namespace tinitypes.Page {
   }
 
 
-  interface ILifetime<R = {}> {
+  interface LifeCycles<R = {}> {
     /**
      * Page lifecycle
      * onLoad được gọi sau khi Page được khởi tạo.

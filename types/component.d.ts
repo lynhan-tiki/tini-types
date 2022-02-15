@@ -1,60 +1,16 @@
-/// <reference no-default-lib="true"/> 
-/// <reference path="entitites.d.ts"/>
+/// <reference no-default-lib="true"/>  
+/// <reference lib="es6"/>  
 
 declare namespace tinitypes.Component {
 
-   
 
-
-
- 
-  type UNACCESSIBLE_KEYS_IN_COMPONENT = "methods" | "onInit" | "deriveDataFromProps" | "didMount" | "didUpdate" | "didUnmount"
-
-  type ComponentFunctionRef<REF, D, P> =
-    Omit<
-      REF,
-      UNACCESSIBLE_KEYS_IN_COMPONENT
-    >
-    & tinitypes.Entities.UPDATE_VIEW_DATA_METHODS<D>
-    & { readonly props: P & tinitypes.Entities.AnyObject }
-
-  interface ComponentOptions<D, P, M> {
-    /**
-     * @property data Object which is binded one way to the UI, pls make sure you only update `this.data` via `this.setData`
-     */
-    data?: D;
-    /**
-     * @property props Object which is default value of props sending from parent Node(from Component or Page)
-     */
-    props?: P;
-    /**
-   * @property methods Object included methods defined by user
-   */
-    readonly methods?:  {
-      [K in keyof M]: M[K] extends number | string | undefined | null ? M[K] & ThisType<M> :
-      ((this:
-        ComponentFunctionRef<ComponentOptions<D, P, M>, D, P>
-          & {
-            [K in keyof M]: M[K] extends number | string | undefined | null ? M[K] :
-              ((this: ComponentFunctionRef<ComponentOptions<D, P, M>, D, P> & M, ...params?: any[]) => ReturnType<M[K]>)
-          }
-        , ...params?: any[]) => ReturnType<M[K]>)
-      
-    } ;
-    // & ThisType<M & ComponentFunctionRef<ComponentOptions<D, P, M>, D, P>>;
+  interface LifeCycles<R, D, P> {
 
     /**
      * @function
      * `Component.onInit` được gọi khi Component được khởi tạo 
      */
-    onInit?(this:
-      ComponentFunctionRef<ComponentOptions<D, P, M>, D, P>
-      & {
-        [K in keyof M]: M[K] extends number | string | undefined | null ? M[K] :
-        ((this: ComponentFunctionRef<ComponentOptions<D, P, M>, D, P> & M, ...params?: any[]) => ReturnType<M[K]>)
-      }
-
-    ): void;
+    onInit(this: R): void | Promise<void>
 
     /**
      * @function
@@ -69,10 +25,7 @@ declare namespace tinitypes.Component {
      *  - Gọi các hàm this.setData và this.$spliceData để thay đổi data
      *  - Sử dụng nextProps để lấy ra các thuộc tính mới sẽ được update
      */
-    deriveDataFromProps?(this: ComponentFunctionRef<ComponentOptions<D, P, M>, D, P>
-      & { [k in keyof M]: (this: ComponentFunctionRef<REF, D, P, M>) => any },
-      nexProps: P
-    ): void;
+    deriveDataFromProps(this: R, nexProps: P): void | Promise<void>
 
     /**
      * @function
@@ -80,10 +33,7 @@ declare namespace tinitypes.Component {
      * Chúng ta có thể sử dụng hàm này để trigger việc load data từ server
      *  
      */
-    didMount?(this: ComponentFunctionRef<ComponentOptions<D, P, M>, D, P>
-      & { [k in keyof M]: (this: ComponentFunctionRef<REF, D, P, M>) => any },
-
-    ): void;
+    didMount(this: R): void | Promise<void>
 
     /**
      * @function
@@ -93,10 +43,7 @@ declare namespace tinitypes.Component {
    * @param prevData previous this.data
    */
 
-    didUpdate?(this: ComponentFunctionRef<ComponentOptions<D, P, M>, D, P>
-      & { [k in keyof M]: (this: ComponentFunctionRef<REF, D, P, M>) => any },
-      prevProps: P, prevData: D
-    ): void;
+    didUpdate(this: R, prevProps: P, prevData: D): void | Promise<void>
 
     /**
      * @function
@@ -105,10 +52,57 @@ declare namespace tinitypes.Component {
      * 
      */
 
-    didUnmount?(this: ComponentFunctionRef<ComponentOptions<D, P, M>, D, P>
-      & { [k in keyof M]: (this: ComponentFunctionRef<REF, D, P, M>) => any });
+    didUnmount(this: R): void | Promise<void>
+  }
+  type AnyObject = Record<string, any>
+  type Instance<TData, TProps, TCustom> = InstanceMethods<TData> &
+    Data<TData> &
+    Props<TProps> &
+    TCustom & AnyObject;
+
+  type Options<TData, TProps, TCustom> = Partial<{methods:Partial<TCustom> & ThisType<Instance<TData, TProps, TCustom>> }> &
+    Partial<Data<TData>> &
+    Partial<Props<TProps>> &
+    Partial<
+      LifeCycles<
+        Instance<TData, TProps, TCustom>, 
+        TData, 
+        TProps
+        >
+      > & 
+    ThisType<Instance<TData, TProps, TCustom>>;
+    
+  interface Constructor {
+    <TData extends AnyObject, TProps extends AnyObject, TCustom>(
+      options: Options<TData, TProps, TCustom>
+    ): void
   }
 
 
+
+
+  type CustomOption = Record<string, any>
+  type DataOption = Record<string, any>
+
+  interface InstanceMethods<D> {
+    setData(
+      data: Partial<D> & AnyObject,
+      callback?: () => void
+    ): void
+
+
+  }
+  interface Data<D> {
+    data: D
+  }
+  interface Props<P> {
+    props: P
+  }
+
+  interface Custom<T> {
+    methods: T  
+  }
+
 }
+
 

@@ -8,7 +8,7 @@
 declare var console: any
 type Methods = {
   noBug(): void;
-  onClick(): void;
+  onClick(eventName: string): string;
   onTap(): void;
   hello: string;
 };
@@ -22,7 +22,7 @@ type Data = {
 }
 
 Component
-  // <Data, Props, Methods>
+  <Data, Props, Methods>
   (
     {
       onInit() {
@@ -31,15 +31,15 @@ Component
         this.props.defaultPropsString;
         this.setData({ test: 'nana' })
         this.setData({ test: 'nana', notDefinedKey: "lalala" })
-        this.setData(d => ({ test: 'nana', num: d.num }), data => {
-          console.log({ 'updated': data })
+        this.setData(d => ({ test: 'nana', num: d.num }),  () => {
+          console.log({ 'updated': this.data })
         })
 
         this.props.defaultPropsMethod();
         this.onTap();
-        this.onClick();
+        this.onClick('s');
         this.onClick("hell");
-        this.noBug
+        this.noBug()
         this.hello
         this.data.num;
         this.data
@@ -51,19 +51,17 @@ Component
         defaultPropsString: "omg",
         defaultPropsMethod: () => {
 
-        },
-        test() {
-
-        }
+        }, 
       },
       data: {
         test: "hello",
         num: 5,
       },
       methods: {
-        noBug() {
+        noBug:function() {
           this.onClick();
           this.hello;
+          this.setData({ test: 'nana' })
           this.data.num;
           this.props.defaultPropsMethod
         },
