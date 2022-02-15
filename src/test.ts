@@ -5,7 +5,7 @@
 // / <reference lib="dom"/>
 
 
-declare var console : any
+declare var console: any
 type Methods = {
   noBug(): void;
   onClick(): void;
@@ -83,15 +83,72 @@ Component
 
 
 Page
-<
-  {
-    pageName: string;
-  }, {
-    userMethod(test: string): string
-  }>
-  ({
-    data:{pageName:'string'},
-    userMethod(test:string):string{
-      return test;
+  (<tinitypes.Page.Options<
+    {
+      pageName: string;
+    }, {
+      userMethod(test: string): string
     }
-  })
+  >>{
+      data: { pageName: 'string' },
+      userMethod(test: string): string {
+        return test;
+      },
+      async onLoad() {
+        await 5;
+
+        this.userMethod
+
+      }
+    })
+
+
+Page<{ name: string }, { userMethod(): void }>({
+  data: { name: 'string here' },
+  userMethod() { },
+  onLoad() {
+    this.userMethod()
+  }
+})
+
+
+
+
+
+type AppOptionalInterface = {
+  globalData: { name: string },
+  userMethod(name: string): void,
+  var1: number
+}
+App<AppOptionalInterface>({
+  globalData: {
+    name: "lalala"
+  },
+  var1: 55,
+  /**
+   * 
+   * @param {string} name 
+   */
+  userMethod(name) {
+    if (name)
+      if (this.globalData.name.charCodeAt(0) === "l".charCodeAt(0)) {
+        // this.setData({name})
+      }
+  },
+  onLaunch({ referrerInfo }) {
+    if (referrerInfo.appId === 'hihi') {
+      //
+    }
+    this.userMethod('funny');
+    this.var1;
+    // this.setData({name:'se'})
+
+    this.userMethod
+  },
+  onUnhandledRejection:function({promise,reason}){
+     this.globalData.name;
+      console.log({promise,reason})
+  }
+})
+
+getApp<AppOptionalInterface>()

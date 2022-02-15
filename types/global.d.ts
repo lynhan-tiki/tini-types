@@ -5,7 +5,7 @@
  * `App()` là constructor function của app instance, cũng là root entry của app
  * This constructor does not require `new` operator
  */
-declare function App(options: AppOptions): void;
+ declare let App: tinitypes.App.Constructor
 /**
  * Applet cung cấp 1 hàm global là getApp, có thể access ở cả page và component.
  * Hàm getApp trả về instance của application. Ví dụ ở Application, khai báo biến globalData
@@ -25,7 +25,7 @@ declare function App(options: AppOptions): void;
  * app.doSomething()
  * ```
  */
-declare function getApp(): any;
+ declare let getApp: tinitypes.App.GetApp
 
 /**
  * Page() là constructor function cho các pages mà user defines

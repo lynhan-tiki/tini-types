@@ -1,118 +1,149 @@
-
-
-
-/// <reference path="../types/index.d.ts"/> 
-/// <reference no-default-lib="true"/> 
-
-
-Component({
-  onInit() {
-    this.data.num;
-    this.data.num;
-    this.props.defaultPropsString;
-    this.setData({ test: 'nana' })
-    this.setData({ test: 'nana', notDefinedKey: "lalala" })
-    this.setData(d => ({ test: 'nana', num: d.num }), data => {
-      console.log({ 'updated': data })
-    })
-
-    this.props.defaultPropsMethod();
-    // this.methods.onTap();
-    this.handleClick();
-    this.noBug
-    this.hello
-    this.data.num;
-    this.data
-
-  },
-  didMount() {
-    // this.
-
-  },
-  props: {
-    defaultPropsString: "omg",
-    defaultPropsMethod: () => {
-       
-    },
-  },
-  data: {
-    test: "hello",
-    num: 5,
-  },
-  methods: {
-    noBug: function (e) {
-      console.log(e);
-      this.handleClick();
-      this.hello;
-      this.data.num;
-      this.props.defaultPropsMethod()
-    },
-
-    hello: "string here",
-
-    handleClick() {
-      this.hello;
-      this.noBug({});
-      this.onTap();
-      this.props;
-      this;
-
-    },
-    onTap: ()=> {
-      fetch
-      this.handleClick();
-      
-    },
-  },
-
-}); 
-
-
-
-
-
-Page({
-  data:{ pageName:"hello page" },
-  onLoad(q){
-     this.setData;
-     this.data.pageName;
-     this.userMethods();
-     this.onLoad;
-     this.setData()
-     console.log(q)
-  },
-  userMethods(test){
-    this.userMethods();
-    return test +" string "}
-})
-
-
-
-
-
-
-
-
-
-
-
-
-Page({
-  data:{
-    name: "lalala"
-  },
-  /**
-   * 
-   * @param {string} name 
-   */
-  userMethod(name){
-    if(this.data.name.charCodeAt(0)==="l".charCodeAt(0)){
-      this.setData({name})
+/// <reference path="../types/index.d.ts"/>
+// / <reference lib="dom"/>
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
-  },
-  onLoad(query){
-    this.userMethod('funny')
-  }
-})
-
- 
+};
+Component({
+    onInit: function () {
+        this.data.num;
+        this.data.num;
+        this.props.defaultPropsString;
+        this.setData({ test: 'nana' });
+        this.setData({ test: 'nana', notDefinedKey: "lalala" });
+        this.setData(function (d) { return ({ test: 'nana', num: d.num }); }, function (data) {
+            console.log({ 'updated': data });
+        });
+        this.props.defaultPropsMethod();
+        this.onTap();
+        this.onClick();
+        this.onClick("hell");
+        this.noBug;
+        this.hello;
+        this.data.num;
+        this.data;
+    },
+    didMount: function () {
+        // this.
+    },
+    props: {
+        defaultPropsString: "omg",
+        defaultPropsMethod: function () {
+        },
+        test: function () {
+        }
+    },
+    data: {
+        test: "hello",
+        num: 5
+    },
+    methods: {
+        noBug: function () {
+            this.onClick();
+            this.hello;
+            this.data.num;
+            this.props.defaultPropsMethod;
+        },
+        hello: "string here",
+        onClick: function (eventName) {
+            this.hello;
+            this.noBug();
+            this.onTap;
+            return eventName;
+        },
+        onTap: function () {
+            this.data.num;
+            this.onClick("hell");
+        }
+    }
+});
+Page({
+    data: { pageName: 'string' },
+    userMethod: function (test) {
+        return test;
+    },
+    onLoad: function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, 5];
+                    case 1:
+                        _a.sent();
+                        this.userMethod;
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+});
+Page({
+    data: { name: 'string here' },
+    userMethod: function () { },
+    onLoad: function () {
+        this.userMethod();
+    }
+});
+App({
+    globalData: {
+        name: "lalala"
+    },
+    var1: 55,
+    /**
+     *
+     * @param {string} name
+     */
+    userMethod: function (name) {
+        if (name)
+            if (this.globalData.name.charCodeAt(0) === "l".charCodeAt(0)) {
+                // this.setData({name})
+            }
+    },
+    onLaunch: function (_a) {
+        var referrerInfo = _a.referrerInfo;
+        if (referrerInfo.appId === 'hihi') {
+            //
+        }
+        this.userMethod('funny');
+        this.var1;
+        // this.setData({name:'se'})
+        this.userMethod;
+    },
+    onUnhandledRejection: function (_a) {
+        var promise = _a.promise, reason = _a.reason;
+        this.globalData.name;
+        console.log({ promise: promise, reason: reason });
+    }
+});
+getApp();
