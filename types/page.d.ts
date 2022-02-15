@@ -10,40 +10,40 @@
 
 declare namespace tinitypes.Page {
   type UNACCESSIBLE_KEYS_IN_PAGE
-  = "onLoad"
-|"onShow"
-|"onReady"
-|"onHide"
-|"onUnload"
-|"onPullDownRefresh"
-|"onShareAppMessage"
+    = "onLoad"
+    | "onShow"
+    | "onReady"
+    | "onHide"
+    | "onUnload"
+    | "onPullDownRefresh"
+    | "onShareAppMessage"
   type OptionalInterface<T> = { [K in keyof T]: Optional<T[K]> }
   type AnyObject = Record<string, any>
-  type Instance<
-    TData extends DataOption,
-    TCustom extends CustomOption
-    > = OptionalInterface<ILifetime> &
+  type Instance<TData, TCustom> =
     InstanceMethods<TData> &
     Data<TData> &
     TCustom
-    
+
   type Options<
-    TData extends DataOption,
-    TCustom extends CustomOption
+    TData,
+    TCustom
     > = (TCustom &
       Partial<Data<TData>> &
-      Partial<ILifetime>) &
+      Partial<ILifetime<
+        Instance<TData, TCustom>
+      >>) &
     ThisType<
-    Omit<Instance<TData, TCustom>,
-    UNACCESSIBLE_KEYS_IN_PAGE>
+      Instance<TData, TCustom>
     >
   type TrivialInstance = Instance<AnyObject, AnyObject>
   interface Constructor {
-    <TData extends DataOption, TCustom extends CustomOption>(
+    <TData, TCustom>(
       options: Options<TData, TCustom>
     ): void
   }
-  interface ILifetime {
+
+
+  interface ILifetime<R = {}> {
     /**
      * Page lifecycle
      * onLoad được gọi sau khi Page được khởi tạo.
@@ -53,40 +53,52 @@ declare namespace tinitypes.Page {
      * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
      */
     onLoad(
+      this: R,
       query: Record<string, string | undefined>
     ): void
     /**
     * được gọi khi Page được show hoặc mở lại từ background
     * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
     */
-    onShow(): void
+    onShow(
+      this: R,
+    ): void
     /**
      * được gọi sau khi page finish render lần đầu tiên
      * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
      */
-    onReady(): void
+    onReady(
+      this: R,
+    ): void
     /**
     * được gọi sau Page bị hide hoặc enter background
     * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
     */
-    onHide(): void
+    onHide(
+      this: R,
+    ): void
     /**
     * được gọi khi page bị destroy
     * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
     */
-    onUnload(): void
+    onUnload(
+      this: R,
+    ): void
 
     /**
      * onPullDownRefresh được gọi khi user pull to refresh hoặc gọi my.startPullDownRefresh.
      * Sử dụng callback này để refresh lại data.
      * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
      */
-    onPullDownRefresh(): void
+    onPullDownRefresh(
+      this: R,
+    ): void
     /**
     * được gọi khi user thực hiện tác vụ "Chia sẻ" trong options menu.
     * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
     */
     onShareAppMessage(
+      this: R,
       options: OnShareAppMessageOptions
     ): IOnShareAppMessageResult
 
@@ -99,7 +111,7 @@ declare namespace tinitypes.Page {
   type CustomOption = Record<string, any>
   type DataOption = Record<string, any>
 
-  interface InstanceMethods<D extends DataOption> {
+  interface InstanceMethods<D> {
     setData(
       data: Partial<D> & AnyObject,
       callback?: () => void
@@ -107,9 +119,9 @@ declare namespace tinitypes.Page {
 
 
   }
-  type InstanceMethods<D extends DataOption> = InstanceMethods<D>
+  type InstanceMethods<D> = InstanceMethods<D>
 
-  interface Data<D extends DataOption> {
+  interface Data<D> {
     data: D
   }
 
@@ -142,20 +154,20 @@ declare namespace tinitypes.Page {
   }
 
   type IPageScrollEvent =
-  | [
-    {
+    | [
+      {
+        readonly scrollTop: number;
+        readonly scrollHeight: number;
+      },
+      null,
+      null
+    ]
+    | {
       readonly scrollTop: number;
       readonly scrollHeight: number;
-    },
-    null,
-    null
-  ]
-  | {
-    readonly scrollTop: number;
-    readonly scrollHeight: number;
-  };
+    };
 
- 
+
 
 }
 
