@@ -139,6 +139,7 @@ App({
       this.data;
       this.globalData;
       this.userMethod();
+      this.onLaunch()
 
     }
   }

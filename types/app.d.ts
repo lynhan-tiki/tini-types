@@ -33,18 +33,23 @@ declare namespace tinitypes.App {
   }
 
   type AnyObject = Record<string, any>
-  type Instance<TCustom> = TCustom
+  type Instance<T> = Omit<T, BANNED_KEYS>
 
+  type BANNED_KEYS = 'onLaunch' |'onShow'
+  |'onHide'
+  |'onError'
+  |'onUnhandledRejection'
+  type TCustom<T> = Omit<T, BANNED_KEYS>
   type Options<
-    TCustom
-    > = (Partial<TCustom & ThisType<Instance<TCustom>>> &
-      Partial<AppEventHandlers<Instance<TCustom>>>) &
+    T
+    > = (Partial<T & ThisType<Instance<T>>> &
+      Partial<AppEventHandlers<Instance<T>>>) &
     ThisType<
-      Instance<TCustom>
+      Instance<T>
     >
   interface Constructor {
-    <TCustom = AnyObject>(
-      options: Options<TCustom>
+    <T = AnyObject>(
+      options: Options<T>
     ): void
   }
 
