@@ -31,7 +31,7 @@ Component({
   props: {
     defaultPropsString: "omg",
     defaultPropsMethod: () => {
-       
+
     },
   },
   data: {
@@ -51,10 +51,10 @@ Component({
       this.setData(d => ({ test: 'nana', num: d.num }), data => {
         console.log({ 'updated': data })
       })
-  
+
       this.data.num;
       this.props.defaultPropsMethod()
-      return event +' '
+      return event + ' '
     },
 
     hello: "string here",
@@ -67,32 +67,33 @@ Component({
       this;
 
     },
-    onTap: ()=> {
-       
+    onTap: () => {
+
       this.handleClick();
-      
+
     },
   },
 
-}); 
+});
 
 
 
 
 
 Page({
-  data:{ pageName:"hello page" },
-  onLoad(q){
-     this.setData;
-     this.data.pageName;
-     this.userMethods();
-     this.onLoad;
-     this.setData()
-     console.log(q)
-  },
-  userMethods(test){
+  data: { pageName: "hello page" },
+  onLoad(q) {
+    this.setData;
+    this.data.pageName;
     this.userMethods();
-    return test +" string "}
+    this.onLoad;
+    this.setData()
+    console.log(q)
+  },
+  userMethods(test) {
+    this.userMethods();
+    return test + " string "
+  }
 })
 
 
@@ -107,21 +108,38 @@ Page({
 
 
 Page({
-  data:{
+  data: {
     name: "lalala"
   },
   /**
    * 
    * @param {string} name 
    */
-  userMethod(name){
-    if(this.data.name.charCodeAt(0)==="l".charCodeAt(0)){
-      this.setData({name})
+  userMethod(name) {
+    if (this.data.name.charCodeAt(0) === "l".charCodeAt(0)) {
+      this.setData({ name })
     }
   },
-  onLoad(query){
+  esf: "",
+  onLoad(query) {
     this.userMethod('funny')
   }
 })
 
- 
+
+App({
+  data: { test: 'tr' },
+  globalData: { test: 'tr' },
+  userMethod() {
+    this.userMethod();
+    this.data.test;
+  },
+  onLaunch({ path }) {
+    if (typeof path === 'string') {
+      this.data;
+      this.globalData;
+      this.userMethod();
+
+    }
+  }
+})

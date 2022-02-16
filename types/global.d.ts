@@ -5,7 +5,7 @@
  * `App()` là constructor function của app instance, cũng là root entry của app
  * This constructor does not require `new` operator
  */
- declare const App: tinitypes.App.Constructor
+ declare const App: tinitypes.App.Constructor 
 /**
  * Applet cung cấp 1 hàm global là getApp, có thể access ở cả page và component.
  * Hàm getApp trả về instance của application. Ví dụ ở Application, khai báo biến globalData

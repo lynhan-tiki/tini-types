@@ -31,7 +31,7 @@ Component
         this.props.defaultPropsString;
         this.setData({ test: 'nana' })
         this.setData({ test: 'nana', notDefinedKey: "lalala" })
-        this.setData(d => ({ test: 'nana', num: d.num }),  () => {
+        this.setData(d => ({ test: 'nana', num: d.num }), () => {
           console.log({ 'updated': this.data })
         })
 
@@ -51,14 +51,14 @@ Component
         defaultPropsString: "omg",
         defaultPropsMethod: () => {
 
-        }, 
+        },
       },
       data: {
         test: "hello",
         num: 5,
       },
       methods: {
-        noBug:function() {
+        noBug: function () {
           this.onClick();
           this.hello;
           this.setData({ test: 'nana' })
@@ -115,7 +115,7 @@ Page<{ name: string }, { userMethod(): void }>({
 
 type AppOptionalInterface = {
   globalData: { name: string },
-  userMethod(name: string): void,
+  userMethod(this: AppOptionalInterface, name: string): void,
   var1: number
 }
 App<AppOptionalInterface>({
@@ -123,14 +123,9 @@ App<AppOptionalInterface>({
     name: "lalala"
   },
   var1: 55,
-  /**
-   * 
-   * @param {string} name 
-   */
   userMethod(name) {
     if (name)
       if (this.globalData.name.charCodeAt(0) === "l".charCodeAt(0)) {
-        // this.setData({name})
       }
   },
   onLaunch({ referrerInfo }) {
@@ -141,11 +136,11 @@ App<AppOptionalInterface>({
     this.var1;
     // this.setData({name:'se'})
 
-    this.userMethod
+    this.userMethod;
   },
-  onUnhandledRejection:function({promise,reason}){
-     this.globalData.name;
-      console.log({promise,reason})
+  onUnhandledRejection({ promise, reason }) {
+    this.globalData.name;
+    console.log({ promise, reason })
   }
 })
 

@@ -1,5 +1,5 @@
 /// <reference no-default-lib="true"/>  
-/// <reference lib="es6"/>  
+/// <reference lib="es5"/>  
 
 declare namespace tinitypes.Component {
 
@@ -81,9 +81,7 @@ declare namespace tinitypes.Component {
 
 
 
-  type CustomOption = Record<string, any>
-  type DataOption = Record<string, any>
-
+   
   interface InstanceMethods<D> {
     setData(
       data: Partial<D> & AnyObject,

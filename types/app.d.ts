@@ -1,5 +1,7 @@
 /// <reference no-default-lib="true"/> 
-type Query = Record<string, string | number>;
+/// <reference lib="es5"/> 
+
+
 
 declare namespace tinitypes.App {
   interface ReferrerInfo {
@@ -29,7 +31,27 @@ declare namespace tinitypes.App {
   interface OnUnhandledRejectionCallback<R> {
     (this: R, event: OnUnhandledRejectionEvent): void
   }
-  interface Option<R = {}> {
+
+  type AnyObject = Record<string, any>
+  type Instance<TCustom> = TCustom
+
+  type Options<
+    TCustom
+    > = (Partial<TCustom & ThisType<Instance<TCustom>>> &
+      Partial<AppEventHandlers<Instance<TCustom>>>) &
+    ThisType<
+      Instance<TCustom>
+    >
+  interface Constructor {
+    <TCustom = AnyObject>(
+      options: Options<TCustom>
+    ): void
+  }
+
+
+
+
+  interface AppEventHandlers<R = {}> {
     /**
    * *App lifecycle*。
    *
@@ -65,17 +87,11 @@ declare namespace tinitypes.App {
     onUnhandledRejection: OnUnhandledRejectionCallback<R>
   }
 
-  type Instance<T extends IAnyObject> = Option & T
-  type Options<T extends IAnyObject> = Partial<Option<Instance<T>>> &
-    T &
-    ThisType<Instance<T>>
-  interface Constructor {
-    <T extends IAnyObject>(options: Options<T>): void
-  }
+
   interface GetApp {
-    <T = IAnyObject>(): Omit<Instance<T>, keyof Option>
+    <T = AnyObject>(): Omit<Instance<T>, keyof AppEventHandlers>
   }
 }
 
-declare let App: tinitypes.App.Constructor 
+
 

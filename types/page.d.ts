@@ -1,4 +1,5 @@
 /// <reference no-default-lib="true"/> 
+/// <reference lib="es5"/> 
 
 
 
@@ -9,15 +10,8 @@
 
 
 declare namespace tinitypes.Page {
-  type UNACCESSIBLE_KEYS_IN_PAGE
-    = "onLoad"
-    | "onShow"
-    | "onReady"
-    | "onHide"
-    | "onUnload"
-    | "onPullDownRefresh"
-    | "onShareAppMessage"
-  type OptionalInterface<T> = { [K in keyof T]: Optional<T[K]> }
+   
+   
   type AnyObject = Record<string, any>
   type Instance<TData, TCustom> =
     InstanceMethods<TData> &
@@ -41,6 +35,50 @@ declare namespace tinitypes.Page {
     ): void
   }
 
+
+ 
+  interface InstanceMethods<D> {
+    setData(
+      data: Partial<D> & AnyObject,
+      callback?: () => void
+    ): void
+
+
+  }
+
+  interface Data<D> {
+    data: D
+  }
+
+
+  interface GetCurrentPages {
+    (): Array<Instance<AnyObject, AnyObject>>
+  }
+
+
+  type OnShareAppMessageOptions = any;
+    interface IOnShareAppMessageResult {
+    title: string;
+    desc?: string;
+    path: string;
+    content?: string; 
+    success?(): void;
+    fail?(): void;
+  }
+
+  type IPageScrollEvent =
+    | [
+      {
+        readonly scrollTop: number;
+        readonly scrollHeight: number;
+      },
+      null,
+      null
+    ]
+    | {
+      readonly scrollTop: number;
+      readonly scrollHeight: number;
+    };
 
   interface LifeCycles<R = {}> {
     /**
@@ -106,65 +144,6 @@ declare namespace tinitypes.Page {
 
   }
 
-
-  type CustomOption = Record<string, any>
-  type DataOption = Record<string, any>
-
-  interface InstanceMethods<D> {
-    setData(
-      data: Partial<D> & AnyObject,
-      callback?: () => void
-    ): void
-
-
-  }
-  type InstanceMethods<D> = InstanceMethods<D>
-
-  interface Data<D> {
-    data: D
-  }
-
-
-  interface GetCurrentPages {
-    (): Array<Instance<AnyObject, AnyObject>>
-  }
-
-
-  type OnShareAppMessageOptions =
-    | {
-      from: "button";
-      target: Record<string, any>;
-      webViewUrl?: string;
-    }
-    | {
-      from: "menu";
-      webViewUrl?: string;
-    };
-
-  interface IOnShareAppMessageResult {
-    title: string;
-    desc?: string;
-    path: string;
-    content?: string;
-    imageUrl?: string;
-    bgImgUrl?: string;
-    success?(): void;
-    fail?(): void;
-  }
-
-  type IPageScrollEvent =
-    | [
-      {
-        readonly scrollTop: number;
-        readonly scrollHeight: number;
-      },
-      null,
-      null
-    ]
-    | {
-      readonly scrollTop: number;
-      readonly scrollHeight: number;
-    };
 
 
 
