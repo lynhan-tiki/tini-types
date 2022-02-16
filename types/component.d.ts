@@ -73,7 +73,7 @@ declare namespace tinitypes.Component {
     ThisType<Instance<TData, TProps, TCustom>>;
     
   interface Constructor {
-    <TData extends AnyObject, TProps extends AnyObject, TCustom>(
+    <TData extends AnyObject, TProps extends AnyObject, TCustom extends AnyObject>(
       options: Options<TData, TProps, TCustom>
     ): void
   }
