@@ -1,7 +1,6 @@
 
 /// <reference no-default-lib="true"/> 
 
-/// <reference no-default-lib="true"/> 
 declare namespace my {
   interface ISaveFileSuccessResult {
     readonly savedFilePath: string;
