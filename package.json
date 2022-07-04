@@ -1,18 +1,52 @@
 {
   "name": "@tiki.vn/tini-types",
-  "version": "0.3.0",
-  "description": "TypeScript declarations for Tiki's Tini App.",
+  "version": "0.3.1",
+  "description": "Type definitions for APIs of Tiki Tini App in Javascript and TypeScript",
+  "main": "./index.d.ts",
+  "types": "./index.d.ts",
+  "engines": {
+    "npm": "*",
+    "yarn": "0 - do not use yarn here"
+  },
+  "scripts": {
+    "test": "run-p test:tsd lint",
+    "watch": "node watch.js",
+    "test:tsd": "tsd",
+    "lint": "eslint --config .eslintrc.js ./**/*.ts",
+    "lint:fix": "eslint --config .eslintrc.js ./**/*.ts --fix"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tikivn/tini-types.git"
+    "url": "git+https://github.com/tikivn/tini-types.git"
+  },
+  "author": "Tiki Tini App <tiniapp@tiki.vn>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tikivn/tini-types/issues"
   },
   "keywords": [
     "tiniapp",
     "types"
   ],
-  "license": "MIT",
-  "types": "./types/index.d.ts",
+  "homepage": "https://github.com/tikivn/tini-types#readme",
   "devDependencies": {
-    "typescript": "^4.5.5"
-  }
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "chokidar": "^3.5.3",
+    "eslint": "^7.20.0",
+    "npm-run-all": "^4.1.5",
+    "tsd": "^0.14.0",
+    "typescript": "^4.1.5"
+  },
+  "tsd": {
+    "directory": "test"
+  },
+  "files": [
+    "LICENSE",
+    "CHANGELOG.md",
+    "README.md",
+    "index.d.ts",
+    "typings.json",
+    "types/"
+  ]
 }
