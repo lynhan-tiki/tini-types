@@ -24,6 +24,7 @@ SOFTWARE.
 /// <reference path="./lib.my.app.d.ts" />
 /// <reference path="./lib.my.page.d.ts" />
 /// <reference path="./lib.my.component.d.ts" />
+/// <reference path="./lib.my.env.d.ts" />
 
 declare namespace tinitypes {
   type IAnyObject = Record<string, any>

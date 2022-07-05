@@ -31,9 +31,9 @@ declare namespace tinitypes.App {
     interface LaunchShowOption {
       path: string
       /**
-     * Khi sử dụng my.navigateTo, my.redirectTo, params sẽ truyền vào trong query.
-     * query là object parse từ URLSearchParams, xem thêm tại https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
-     */
+       * Khi sử dụng my.navigateTo, my.redirectTo, params sẽ truyền vào trong query.
+       * query là object parse từ URLSearchParams, xem thêm tại https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+       */
       query: Record<string, string>
       referrerInfo?: ReferrerInfo
     }
@@ -75,8 +75,7 @@ declare namespace tinitypes.App {
 
 
     interface AppEventHandlers<R = {}> {
-      /**
-     * *App lifecycle*。
+    /**
      *
      * `onLaunch` sẽ được trigger khi lần đầu init app.
      *
@@ -86,7 +85,6 @@ declare namespace tinitypes.App {
       onLaunch(this: R, options: LaunchShowOption): void | Promise<void>
 
       /**
-       * *App lifecycle*。
        *
        * `onShow` sẽ được trigger sau khi hàm `onLaunch`
        *  và trước khi khởi tạo Page.
@@ -96,7 +94,6 @@ declare namespace tinitypes.App {
        */
       onShow(this: R, options: LaunchShowOption): void | Promise<void>
       /**
-      * *App lifecycle*。
       *
       * `onShow` sẽ được trigger khi app bị ẩn.
       *
@@ -125,15 +122,16 @@ declare namespace tinitypes.App {
  */
 declare const App: tinitypes.App.Constructor
 /**
-  * Applet cung cấp 1 hàm global là getApp, có thể access ở cả page và component.
-  * Hàm getApp trả về instance của application. Ví dụ ở Application, khai báo biến globalData
+  * Hàm getApp trả về instance của application.
+  * @example
+  * Ví dụ ở Application, khai báo biến globalData
   * ```js
-  * App({
-  * globalData: 1
-  *  doSomething() {
-  *   // bla bla
-  *  }
-  * })
+     App({
+      globalData: 1
+        doSomething() {
+        // bla bla
+        }
+     })
   * ```
   * Ở page access biến globalData và gọi hàm doSomething
   * ```js

@@ -1,8 +1,3 @@
-
-
-
-
-
 /*! *****************************************************************************
 Copyright (c) 2022 TIKI COMPANY LIMITED. All rights reserved.
 
@@ -25,136 +20,164 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ***************************************************************************** */
 declare namespace tinitypes.Page {
-    type AnyObject = Record<string, any>
-    type Instance<TData, TCustom> =
-      InstanceMethods<TData> &
-      Data<TData> &
-      TCustom
-    type Options<
-      TData,
-      TCustom
-      > = (TCustom &
-        Partial<Data<TData>> &
-        Partial<LifeCycles<
-          Instance<TData, TCustom>
-        >>) &
-      ThisType<
-        Instance<TData, TCustom>
-      >
-    interface Constructor {
-      <TData, TCustom extends AnyObject>(
-        options: Options<TData, TCustom>
-      ): void
-    }
-    interface InstanceMethods<D> {
-      setData(
-        data: Partial<D> & AnyObject,
-        callback?: () => void
-      ): void
-    }
-    interface Data<D> {
-      data: D
-    }
-
-
-    interface GetCurrentPages {
-      (): Array<Instance<AnyObject, AnyObject>>
-    }
-
-
-    type OnShareAppMessageOptions = any
-      interface IOnShareAppMessageResult {
-      title: string
-      desc?: string
-      path: string
-      content?: string
-      success?(): void
-      fail?(): void
-    }
-
-    type IPageScrollEvent =
-      | [
-        {
-          readonly scrollTop: number
-          readonly scrollHeight: number
-        },
-        null,
-        null
-      ]
-      | {
+  type AnyObject = Record<string, any>
+  type OnShareAppMessageOptions = any
+  interface IOnShareAppMessageResult {
+    title: string
+    desc?: string
+    path: string
+    content?: string
+    success?(): void
+    fail?(): void
+  }
+  type PageScrollEvent =
+    | [
+      {
         readonly scrollTop: number
         readonly scrollHeight: number
-      }
+      },
+      null,
+      null
+    ]
+    | {
+      readonly scrollTop: number
+      readonly scrollHeight: number
+    }
 
-    interface LifeCycles<R = {}> {
+
+
+    interface LifeCycles {
       /**
        * Page lifecycle
-       * onLoad được gọi sau khi Page được khởi tạo.
-       * Khi sử dụng my.navigateTo, my.redirectTo,
-       * @param query sẽ truyền vào trong query.
-       * Format của query: "parameterName=parameterValue¶meterName=parameterValue...".
-       * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
+       * onLoad được gọi sau khi Page được khởi tạo bởi App
+       * Hoặc khởi tạo thông qua my.navigateTo, my.redirectTo,
        */
-      onLoad(
-        this: R,
-        query: Record<string, string | undefined>
-      ): void | Promise<void>
-      /**
-      * được gọi khi Page được show hoặc mở lại từ background
-      * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
-      */
-      onShow(
-        this: R,
-      ): void | Promise<void>
+      onLoad?(
+        /**
+         * page load query string
+         * @example "parameterName=parameterValue&meterName=parameterValue...".
+         * @see https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
+         */
+        query?: string): void
       /**
        * được gọi sau khi page finish render lần đầu tiên
        * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
        */
-      onReady(
-        this: R,
-      ): void | Promise<void>
+      onReady?(): void
+      /**
+      * được gọi khi Page được show hoặc mở lại từ background
+      * @see https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
+      */
+      onShow?(): void
       /**
       * được gọi sau Page bị hide hoặc enter background
-      * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
+      * @see https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
       */
-      onHide(
-        this: R,
-      ): void | Promise<void>
+      onHide?(): void
       /**
       * được gọi khi page bị destroy
-      * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
+      * @see https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
       */
-      onUnload(
-        this: R,
-      ): void | Promise<void>
-
+      onUnload?(): void
       /**
        * onPullDownRefresh được gọi khi user pull to refresh hoặc gọi my.startPullDownRefresh.
        * Sử dụng callback này để refresh lại data.
-       * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
+       * @see https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
        */
-      onPullDownRefresh(
-        this: R,
-      ): void | Promise<void>
+      onPullDownRefresh?(): void
+      onReachBottom?(): void
+
+      onPageScroll?(event: PageScrollEvent): void
+
+      onPageholderTap?: () => void
       /**
       * được gọi khi user thực hiện tác vụ "Chia sẻ" trong options menu.
-      * https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
+      * @see https://developers.tiki.vn/docs/framework/miniapp-page/life-cycle
       */
-      onShareAppMessage(
-        this: R,
-        options: OnShareAppMessageOptions
-      ): IOnShareAppMessageResult
+      onShareAppMessage?: (options: OnShareAppMessageOptions) => IOnShareAppMessageResult
+
     }
+
+
+  interface Instance<D> extends Record<string, any> {
+    readonly data: D
+    /**
+     * Page's update state method
+     * @see https://developers.tiki.vn/docs/framework/overview#reactive-data-binding
+     */
+    readonly setData: (data: Partial<D>&{[k:string]:any}, callback?: () => void) => void
+    /**
+     * an optimized method for update state
+     * @example
+     * ```js
+       Page({
+         data: {
+           a: {
+             b: [1,2,3,4],
+           },
+         },
+         onLoad(){
+           this.$spliceData({ 'a.b': [1, 0, 5, 6] });
+         },
+       });
+     * ```
+     * @see https://developers.tiki.vn/blog#gi%E1%BA%A3m-thi%E1%BB%83u-d%E1%BB%AF-li%E1%BB%87u-truy%E1%BB%81n-v%C3%A0o-setdata
+     */
+    readonly $spliceData: (
+      data: {
+        [k: string]: [number, number, ...any[]]
+      },
+      callback?: () => void
+    ) => void
+    /**
+    * batching multiple `this.setData`
+    * @example
+    * ```js
+      Page({
+        data: {
+          counter: 0,
+        },
+        onLoad() {
+          setTimeout(() => {
+            this.$batchedUpdates(() => {
+              this.setData({
+                counter: this.data.counter + 1,
+              });
+              this.setData({
+                counter: this.data.counter + 1,
+              });
+            });
+          }, 200);
+        },
+      });
+    * ```
+    * @see https://developers.tiki.vn/blog#gi%E1%BA%A3m-thi%E1%BB%83u-d%E1%BB%AF-li%E1%BB%87u-truy%E1%BB%81n-v%C3%A0o-setdata
+    */
+    $batchedUpdates: (callback: () => void) => void
   }
+
+  type PageOptions<D = Record<string, any>, M = Record<string, any>> = LifeCycles & {
+   readonly data?: D
+    [name: string]: any
+  } & M & ThisType<Instance<D> & M>
+
+  interface GetCurrentPages {
+    (): Array<PageOptions<{}, {}>>
+  }
+  interface Constructor {
+    <Data, Methods>(option: PageOptions<Data, Methods>): void
+  }
+
+}
 /**
- * `Page()` là constructor function cho các pages mà user defines
+ * `Page()` là constructor function cho các page mà user define
  *
  *  _Page constructor does not require `new` operator_
  */
 declare const Page: tinitypes.Page.Constructor
 /**
-  * getCurrentPages() là global method được sử dụng để lấy stack của page hiện tại.
+  * getCurrentPages() là global method được sử dụng để lấy stack của các page hiện tại.
   * Kết quả trả về là array các pages với phần tử đầu tiên là home, phần từ cuối cùng là page hiện tại.
-  * https://developers.tiki.vn/docs/framework/miniapp-page/get-current-pages
+  * @see https://developers.tiki.vn/docs/framework/miniapp-page/get-current-pages
   */
 declare const getCurrentPages: tinitypes.Page.GetCurrentPages

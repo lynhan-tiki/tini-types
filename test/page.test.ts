@@ -2,7 +2,7 @@ import { expectType } from 'tsd'
 
 expectType<void>(Page({}))
 
-expectType<Record<string, any>>(getCurrentPages()[0].data)
+expectType<undefined|{}>(getCurrentPages()[0].data)
 
 type UserInfo =  any
 const app = getApp<{

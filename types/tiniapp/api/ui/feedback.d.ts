@@ -110,7 +110,7 @@ declare namespace my {
   function showLoading(options?: string | IShowLoadingOptions): Promise<void>
 
   interface IHideLoadingOptions {
-    page?: tinitypes.Page.Instance<tinitypes.Page.AnyObject, tinitypes.Page.AnyObject>
+    page?: tinitypes.Page.Instance<tinitypes.Page.AnyObject>
   }
 
   /**

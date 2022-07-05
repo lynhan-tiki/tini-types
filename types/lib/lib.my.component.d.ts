@@ -20,112 +20,117 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ***************************************************************************** */
 
-
 declare namespace tinitypes.Component {
 
-
-    interface LifeCycles<R, D, P> {
-
-      /**
-       * @function
-       * `Component.onInit` được gọi khi Component được khởi tạo
-       */
-      onInit(this: R): void | Promise<void>
-
-      /**
-       * @function
-       *  `Component.deriveDataFromProps` được gọi sau khi Component được khởi tạo, hoặc khi Component nhận các props mới
-       *
-       * @param `nextProps` next props sending to component
-       *
-       * Trong deriveDataFromProps bạn có thể
-       *  - Truy cập vào this.is, this.$id, this.$page và các thuộc tính khác
-       *  - Truy cập vào this.data, this.props
-       *  - Truy cập vào custom properties và methods
-       *  - Gọi các hàm this.setData và this.$spliceData để thay đổi data
-       *  - Sử dụng nextProps để lấy ra các thuộc tính mới sẽ được update
-       */
-      deriveDataFromProps(this: R, nexProps: P): void | Promise<void>
-
-      /**
-       * @function
-       * `didMount` được gọi sau khi Custom Component được render lần đầu tiên.
-       * Chúng ta có thể sử dụng hàm này để trigger việc load data từ server
-       *
-       */
-      didMount(this: R): void | Promise<void>
-
-      /**
-       * @function
-     * `Component.didUpdate` được gọi sau khi data của Component được update.
-     * Hàm này được gọi mõi khi data trong Component thay đổ
-     * @param prevProps previous this.props received
-     * @param prevData previous this.data
+  interface LifeCycles<D, P> {
+    /**
+     * `onInit` được gọi khi Component được khởi tạo
      */
-
-      didUpdate(this: R, prevProps: P, prevData: D): void | Promise<void>
-
+    onInit?(): void
+    /**
+     *  `deriveDataFromProps` được gọi sau khi Component được khởi tạo, hoặc khi Component nhận các props mới
+     *
+     * Trong deriveDataFromProps bạn có thể
+     *  - Truy cập vào this.is, this.$id, this.$page và các thuộc tính khác
+     *  - Truy cập vào this.data, this.props
+     *  - Truy cập vào custom properties và methods
+     *  - Gọi các hàm this.setData và this.$spliceData để thay đổi data
+     *  - Sử dụng nextProps để lấy ra các thuộc tính mới sẽ được update
+     */
+    deriveDataFromProps?(
       /**
-       * @function
-       *
-       * `Component.didUnmount` được gọi khi Component được unmount.
-       *
+       * `nextProps` next props to be sending to component
        */
-
-      didUnmount(this: R): void | Promise<void>
-    }
-    type AnyObject = Record<string, any>
-    type Instance<TData, TProps, TCustom> = InstanceMethods<TData> &
-      Data<TData> &
-      Props<TProps> &
-      TCustom & AnyObject
-
-    type Options<TData, TProps, TCustom> = Partial<{methods:Partial<TCustom> & ThisType<Instance<TData, TProps, TCustom>> }> &
-      Partial<Data<TData>> &
-      Partial<Props<TProps>> &
-      Partial<
-        LifeCycles<
-          Instance<TData, TProps, TCustom>,
-          TData,
-          TProps
-          >
-        > &
-      ThisType<Instance<TData, TProps, TCustom>>
-
-    interface Constructor {
-      <TData extends AnyObject, TProps extends AnyObject, TCustom extends AnyObject>(
-        options: Options<TData, TProps, TCustom>
-      ): void
-    }
-
-
-
-
-
-    interface InstanceMethods<D> {
-      setData(
-        data: Partial<D> & AnyObject,
-        callback?: () => void
-      ): void
-
-
-    }
-    interface Data<D> {
-      data: D
-    }
-    interface Props<P> {
-      props: P
-    }
-
-    interface Custom<T> {
-      methods: T
-    }
-
+      nextProps: Partial<P>): void
+    /**
+     *
+     * `didMount` được gọi sau khi Custom Component được render lần đầu tiên.
+     * Chúng ta có thể sử dụng hàm này để trigger việc load data từ server
+     *
+     */
+    didMount?(): void
+    /**
+    * `didUpdate` được gọi sau khi data của Component được update.
+    */
+    didUpdate?(
+      /**
+       * previous this.props received
+       */
+      prevProps: P,
+      /**
+       * previous this.data
+       */
+      prevData: D): void
+    /**
+     * `didUnmount` được gọi khi Component được unmount.
+     */
+    didUnmount?(): void
+  }
+  interface ComponentMethods {
+    /**
+     * User define methods, using to handle logic and UI events
+     */
+    [name: string]: (...args: any[]) => any
+  }
+  interface Instance<P, D> extends Record<string, any> {
+    /**
+     * Component's state
+     * @see https://developers.tiki.vn/docs/framework/overview#reactive-data-binding
+     */
+    readonly data: D
+    /**
+     * Component's default properties
+     */
+    readonly props: P
+    /**
+     * Component's update state method
+     * @see https://developers.tiki.vn/docs/framework/overview#reactive-data-binding
+     */
+    setData: (data: Partial<D>&{[k:string]:any}, callback?: () => void) => void
   }
 
+  type ComponentOptions<
+    P extends Record<string, any> = Record<string, any>,
+    D = any,
+    M = ComponentMethods
+    > = LifeCycles<D, P> & {
+      data?: D
+      props?: P
+      [key: string]: any
+      methods?: M & ThisType<Instance<P, D> & M> & ComponentMethods
+      constraint?: Record<string, any>
+    } & ThisType<Instance<P, D> & M>
+
+  interface Constructor {
+    <Props, Data, Methods>(
+      options: ComponentOptions<Props, Data, Methods>
+    ): void
+  }
+}
 
 /**
- * Component() là constructor function cho các custome component mà user defines
- * This constructor does not require `new` operator
+ * `Component` là constructor cho các custom component mà user define
+ *
+ *  _This constructor does not require the `new` operator_
+ *
+ * @example
+ *
+ * ```js
+  Component({
+    data: { y: 2 },
+    props: { x: 1 },
+    onInit() {},
+    didMount() {},
+    didUpdate(prevProps, prevData) {},
+    didUnmount() {},
+    deriveDataFromProps() {},
+    methods: {
+      onMyClick(ev) {
+        my.alert({});
+        this.props.onXX({ ...ev, e2: 1 });
+      }
+    }
+  });
+ * ```
  */
 declare const Component: tinitypes.Component.Constructor
