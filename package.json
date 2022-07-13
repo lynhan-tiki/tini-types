@@ -5,8 +5,7 @@
   "main": "./index.d.ts",
   "types": "./index.d.ts",
   "engines": {
-    "npm": "*",
-    "yarn": "0 - do not use yarn here"
+    "npm": "*"
   },
   "scripts": {
     "test": "run-p test:tsd lint",
