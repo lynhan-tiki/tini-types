@@ -15,7 +15,7 @@ declare namespace my {
     readonly statusBarHeight: number
     readonly language: string
     readonly storage: string
-    readonly app: 'alipay' | 'UC' | 'QUARK' | 'AK' | 'amap' | 'YK'
+    readonly app: 'Tiki' | 'Tiki Seller'
     readonly titleBarHeight: number
     readonly model: string
     readonly screenWidth: number
