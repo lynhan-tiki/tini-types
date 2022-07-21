@@ -24,6 +24,15 @@ declare namespace my {
    */
   function addIconsToNavigationBar(options: IAddIconsToNavigationOptions): void
 
+
+  interface IGetTitleColor extends INavigateBaseCallbackOptions<{color: string}> {
+  }
+  /**
+   * Lấy background color của Navigation Bar.
+   * Also, check out {@link https://developers.tiki.vn/docs/api/ui/navigation-bar/get-title-color}
+   */
+  function getTitleColor(options: IGetTitleColor): void
+
   interface INavigateToOptions extends INavigateBaseCallbackOptions {
     url: string
   }
