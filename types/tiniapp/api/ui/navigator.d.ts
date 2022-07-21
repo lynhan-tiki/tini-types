@@ -1,9 +1,10 @@
 
 declare namespace my {
-  interface INavigateBaseCallbackOptions {
-    success?(): void
-    fail?(): void
-    complete?(): void
+  interface INavigateBaseCallbackOptions<S= any, F = S, C = S> {
+    success?: (res: S) => void
+    fail?: (res: F) => void
+    complete?: (res: C) => void
+  }
   }
 
   interface INavigateToOptions extends INavigateBaseCallbackOptions {
