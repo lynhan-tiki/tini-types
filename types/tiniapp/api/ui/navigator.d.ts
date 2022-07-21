@@ -1,11 +1,28 @@
-
 declare namespace my {
   interface INavigateBaseCallbackOptions<S= any, F = S, C = S> {
     success?: (res: S) => void
     fail?: (res: F) => void
     complete?: (res: C) => void
   }
+
+
+  interface IAddIconsToNavigationIconOptions {
+    image: string
+    width?: number
+    height?: number
+    badge?: string
   }
+
+  interface IAddIconsToNavigationOptions extends INavigateBaseCallbackOptions<true> {
+    padding?: number
+    titleBarColor?: string
+    icons: IAddIconsToNavigationIconOptions[]
+  }
+  /**
+   * Thêm icons vào navigation bar bên cạnh nút ba chấm nằm ngang (⋯) mở menu.
+   * Also, check out {@link https://developers.tiki.vn/docs/api/ui/navigation-bar/add-icon-navigation-bar}
+   */
+  function addIconsToNavigationBar(options: IAddIconsToNavigationOptions): void
 
   interface INavigateToOptions extends INavigateBaseCallbackOptions {
     url: string
