@@ -24,7 +24,7 @@ declare namespace my {
     /**
      * Phương thức gọi network. Mặc định sẽ là GET.
      */
-    method?: 'GET' | 'POST'
+    method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
     /**
      * Data kèm theo trong request.。
