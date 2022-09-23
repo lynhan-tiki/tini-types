@@ -1,10 +1,37 @@
-
 declare namespace my {
-  interface INavigateBaseCallbackOptions {
-    success?(): void
-    fail?(): void
-    complete?(): void
+  interface INavigateBaseCallbackOptions<S= any, F = S, C = S> {
+    success?: (res: S) => void
+    fail?: (res: F) => void
+    complete?: (res: C) => void
   }
+
+
+  interface IAddIconsToNavigationIconOptions {
+    image: string
+    width?: number
+    height?: number
+    badge?: string
+  }
+
+  interface IAddIconsToNavigationOptions extends INavigateBaseCallbackOptions<true> {
+    padding?: number
+    titleBarColor?: string
+    icons: IAddIconsToNavigationIconOptions[]
+  }
+  /**
+   * Thêm icons vào navigation bar bên cạnh nút ba chấm nằm ngang (⋯) mở menu.
+   * Also, check out {@link https://developers.tiki.vn/docs/api/ui/navigation-bar/add-icon-navigation-bar}
+   */
+  function addIconsToNavigationBar(options: IAddIconsToNavigationOptions): void
+
+
+  interface IGetTitleColor extends INavigateBaseCallbackOptions<{color: string}> {
+  }
+  /**
+   * Lấy background color của Navigation Bar.
+   * Also, check out {@link https://developers.tiki.vn/docs/api/ui/navigation-bar/get-title-color}
+   */
+  function getTitleColor(options: IGetTitleColor): void
 
   interface INavigateToOptions extends INavigateBaseCallbackOptions {
     url: string
