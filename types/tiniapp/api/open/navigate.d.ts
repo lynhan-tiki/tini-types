@@ -12,7 +12,7 @@ declare namespace my {
   /**
    * my.navigateToMiniApp là API dùng để di chuyển giữa các app.
    */
-  function navigateToMiniProgram(options: INavigateToMiniProgram): void
+  function navigateToMiniApp(options: INavigateToMiniProgram): void
 
   interface INavigateBackMiniProgram {
     extraData?: Record<string, any>
